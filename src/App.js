@@ -46,21 +46,28 @@ export default class App extends React.Component {
   }
 
   render() {
-    const moviesList = this.state.moviesList.map(item => (
-      <MoviesList
-        handleSee={this.handleSee}
-        key={item.show.id}
-        watched={this.state.watched}
-        item={item}
-      />
-    ));
+    const moviesList = this.state.moviesList.map(item => {
+      const { id, name, image, summary, premiered } = item.show;
+      return (
+        <MoviesList
+          handleSee={this.handleSee}
+          key={id}
+          id={id}
+          name={name}
+          image={image.medium}
+          summary={summary}
+          premiered={premiered}
+          watched={this.state.watched[String(id)]}
+        />
+      );
+    });
     return (
       <Container>
         <Row>
           <Col>
             <h1>Batman Movies (TV Show's)</h1>
             <Row>
-              <React.Suspense fallback={<div> Loadding....</div>}>
+              <React.Suspense fallback={<div> Loading....</div>}>
                 {moviesList}
               </React.Suspense>
             </Row>
