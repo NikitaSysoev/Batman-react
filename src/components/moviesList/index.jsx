@@ -3,17 +3,11 @@ import PropTypes from 'prop-types';
 import { Button, Card, Col } from "react-bootstrap";
 
 const MoviesList = ({ item, handleSee, watched }) => {
-
     const { id, image, summary, name, premiered } = item.show;
-
-    const isWatched = (watched, id) => {
-        return !!watched[String(id)]
-    }
-
     return (
         <Col key={id}>
             <Card
-                border={isWatched(watched, id) ? 'success' : 'primary'}
+                border={watched[String(id)] ? 'success' : 'primary'}
                 style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={image.medium} />
                 <Card.Body>
@@ -24,8 +18,8 @@ const MoviesList = ({ item, handleSee, watched }) => {
                         <small className="text-muted" >{premiered} </small><br />
                         <Button
                             onClick={() => handleSee(id)}
-                            variant={isWatched(watched, id) ? "success" : "outline-primary"}>
-                            {isWatched(watched, id) ? 'Смотрел' : 'Не смотрел'}
+                            variant={watched[String(id)] ? "success" : "outline-primary"}>
+                            {watched[String(id)] ? 'Смотрел' : 'Не смотрел'}
                         </Button>
                     </Card.Text>
                 </Card.Body>
