@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, CardColumns } from "react-bootstrap";
 const MoviesList = React.lazy(() => import("./components/moviesList"));
 
 export default class App extends React.Component {
@@ -24,7 +24,7 @@ export default class App extends React.Component {
         return {
           watched: {
             ...prevState.watched,
-            [String(id)]: !prevState.watched[String(id)]
+            [String(id)]: !prevState.watched[id]
           }
         };
       },
@@ -64,13 +64,12 @@ export default class App extends React.Component {
     return (
       <Container>
         <Row>
-          <Col>
+          <Col xs={12}>
             <h1>Batman Movies (TV Show's)</h1>
-            <Row>
-              <React.Suspense fallback={<div> Loading....</div>}>
-                {moviesList}
-              </React.Suspense>
-            </Row>
+            <br />
+            <React.Suspense fallback={<div> Loading....</div>}>
+              <CardColumns>{moviesList}</CardColumns>
+            </React.Suspense>
           </Col>
         </Row>
       </Container>
