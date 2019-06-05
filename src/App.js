@@ -18,7 +18,7 @@ export default class App extends React.Component {
     }
   };
 
-  handleSee = id => {
+  handleChangeWatched = id => {
     this.setState(
       prevState => {
         return {
@@ -49,16 +49,18 @@ export default class App extends React.Component {
     const moviesList = this.state.moviesList.map(item => {
       const { id, name, image, summary, premiered } = item.show;
       return (
-        <MoviesList
-          handleSee={this.handleSee}
-          key={id}
-          id={id}
-          name={name}
-          image={image.medium}
-          summary={summary}
-          premiered={premiered}
-          watched={this.state.watched[String(id)]}
-        />
+        <React.Fragment key={id}>
+          <MoviesList
+            onChange={this.handleChangeWatched}
+            id={id}
+            name={name}
+            image={image.medium}
+            summary={summary}
+            premiered={premiered}
+            watched={this.state.watched[String(id)]}
+          />
+          <br />
+        </React.Fragment>
       );
     });
     return (

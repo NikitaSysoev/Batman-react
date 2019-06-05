@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { Button, Card } from "react-bootstrap";
 
-const MoviesList = ({ handleSee, id, image, summary, name, premiered, watched = false }) => {
+const MoviesList = ({ onChange, id, image, summary, name, premiered, watched = false }) => {
     return (
         <Card
             border={watched ? 'success' : 'primary'}
@@ -15,7 +15,7 @@ const MoviesList = ({ handleSee, id, image, summary, name, premiered, watched = 
                 <Card.Text>
                     <small className="text-muted" >{premiered} </small><br />
                     <Button
-                        onClick={() => handleSee(id)}
+                        onClick={() => onChange(id)}
                         variant={watched ? "success" : "outline-primary"}>
                         {watched ? 'Смотрел' : 'Не смотрел'}
                     </Button>
@@ -32,7 +32,7 @@ MoviesList.propTypes = {
     image: PropTypes.string.isRequired,
     summary: PropTypes.string.isRequired,
     premiered: PropTypes.string.isRequired,
-    handleSee: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
     watched: PropTypes.bool,
     name: PropTypes.string.isRequired
 }
