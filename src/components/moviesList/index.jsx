@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, Card } from "react-bootstrap";
 
 const MoviesList = ({ onChange, id, image, summary, name, premiered, watched = false }) => {
+    const handleClick = () => onChange(id);
     return (
         <Card
             border={watched ? 'success' : 'primary'}
@@ -15,7 +16,7 @@ const MoviesList = ({ onChange, id, image, summary, name, premiered, watched = f
                 <Card.Text>
                     <small className="text-muted" >{premiered} </small><br />
                     <Button
-                        onClick={() => onChange(id)}
+                        onClick={handleClick}
                         variant={watched ? "success" : "outline-primary"}>
                         {watched ? 'Смотрел' : 'Не смотрел'}
                     </Button>
